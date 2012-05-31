@@ -1,12 +1,6 @@
 package net.mysoftworks.cr.support;
 
 import java.io.Serializable;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-
-import net.mysoftworks.cr.model.CollectionMetadata;
 
 import com.vaadin.data.Property;
 import com.vaadin.data.util.BeanItem;
