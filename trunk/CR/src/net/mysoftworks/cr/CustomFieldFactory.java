@@ -21,6 +21,7 @@ public class CustomFieldFactory extends DefaultFieldFactory {
 		if (propertyId.equals("id") || propertyId.toString().startsWith("hibernate")) {
 			return null;
 		}
+		
 		AbstractPropertyData pData = PropertyDataFactory.getPropertyData((BeanItem)item, propertyId);
 		if (pData!=null) {
 			return pData.getField(uiContext);
