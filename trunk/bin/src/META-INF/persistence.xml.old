@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	#########################
+	PERSISTENCE UNIT FOR TEST
+	#########################
+ -->
+<persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+	<persistence-unit name="get-pu" transaction-type="RESOURCE_LOCAL">
+	<provider>org.hibernate.ejb.HibernatePersistence</provider> 
+	 	
+        <class>it.eng.get.model.anagrafica.Soggetto</class>
+        <class>it.eng.get.model.anagrafica.PersonaFisica</class>
+        <class>it.eng.get.model.anagrafica.PersonaGiuridica</class>
+        <class>it.eng.get.model.anagrafica.ComponenteOrganigramma</class>
+        <class>it.eng.get.model.anagrafica.RuoloOrganigramma</class>
+ 	  	<class>it.eng.get.model.viario.Provincia</class>
+	  	<class>it.eng.get.model.viario.Comune</class>
+	  	<class>it.eng.get.model.viario.Nazione</class>
+	  	<class>it.eng.get.model.viario.Indirizzo</class>
+	  	<class>it.eng.get.model.viario.Municipio</class>
+	  	<class>it.eng.get.model.viario.ASL</class>
+	  	<class>it.eng.get.model.pratica.EstrattoPraticaImpl</class>
+	  	<class>it.eng.get.model.pratica.Pratica</class>
+	  	<class>it.eng.get.model.pratica.BOAttivita</class> 
+	  	<class>it.eng.get.model.pratica.BOOperazione</class>
+	  	<class>it.eng.get.model.pratica.MacroAttivita</class>   
+     	<class>it.eng.get.model.pratica.TipoPratica</class> 
+     	<class>it.eng.get.model.pratica.AuditDomandaPratica</class> 
+	  	<class>it.eng.get.model.pratica.TipoDocumento</class>
+	  	<class>it.eng.get.model.pratica.RuoloNominativo</class>
+	  	<class>it.eng.get.model.pratica.StrutturaOrganizzativaMacroAttivita</class>
+	  	<class>it.eng.get.model.pratica.AllegatoPratica</class>
+	  	<class>it.eng.get.model.pratica.NotaPratica</class>
+	  	<class>it.eng.get.model.pratica.OperatoreBackOffice</class>
+	  	<class>it.eng.get.model.pratica.StrutturaRuoloLavorazione</class>
+	  	<class>it.eng.get.model.pratica.StrutturaOrganizzativa</class>
+	  	<class>it.eng.get.model.pratica.StrutturaPratica</class>
+	  	<class>it.eng.get.model.pratica.RuoloPratica</class>
+	  	<class>it.eng.get.model.pratica.Notifica</class>
+	  	<class>it.eng.get.model.pratica.PraticaWorkflowTask</class>
+	  	<class>it.eng.get.model.pratica.DelegaStrutturaLavorazione</class>
+	  	<class>it.eng.get.model.comunicazione.Comunicazione</class>
+	  	<class>it.eng.get.model.comunicazione.AttoreComunicazione</class>
+	  	<class>it.eng.get.model.comunicazione.TipoComunicazione</class>
+	  	<class>it.eng.get.model.comunicazione.StoricoComunicazioni</class>
+	  	<class>it.eng.get.model.comunicazione.AllegatoComunicazione</class>
+	  	<class>it.eng.get.model.comunicazione.CanaleComunicazione</class> 	
+	  	
+<!--
+	    <class>it.eng.get.model.oggetto.Oggetto</class> 
+	  	<class>it.eng.get.model.oggetto.TipologiaOggetto</class>
+	  	<class>it.eng.get.model.oggetto.TipoOggetto</class>
+	  	<class>it.eng.get.model.oggetto.StrutturaOrganizzativa</class>
+	  	<class>it.eng.get.model.oggetto.Attributo</class>
+	  	<class>it.eng.get.model.oggetto.AttributoTipoOggetto</class>
+	  	<class>it.eng.get.model.oggetto.Area</class>
+	  	<class>it.eng.get.model.pratica.Documento</class>
+	  	<class>it.eng.get.model.pratica.Attivita</class>
+	  	<class>it.eng.get.model.pratica.Discriminante</class>
+	  	<class>it.eng.get.model.pratica.TipoDiscriminante</class>
+	  	<class>it.eng.get.model.pratica.Allegato</class>
+	  	<class>it.eng.get.model.pratica.Ente</class>
+	  	<class>it.eng.get.model.pratica.Dichiarazione</class>
+	  	<class>it.eng.get.model.pratica.Intervento</class>
+	  	<class>it.eng.get.model.pratica.Operazione</class>
+	  	<class>it.eng.get.model.pratica.ModelloUnico</class>
+	  	<class>it.eng.get.model.pratica.Procedimento</class>
+	  	<class>it.eng.get.model.pratica.ProcedimentoSemplice</class>
+	  	<class>it.eng.get.model.pratica.ProcedimentoCollegato</class>
+	  	<class>it.eng.get.model.pratica.GerarchiaOperazione</class>
+	  	<class>it.eng.get.model.pratica.GerarchiaAttivita</class>
+-->
+
+		<properties>
+		
+		
+			<!-- 
+			
+		    <property name="hibernate.connection.password" value="getcdr" />
+        	<property name="hibernate.connection.username" value="getcdr" />
+      		<property name="hibernate.connection.url" value="jdbc:oracle:thin:@get2.eng.it:1521:GETDBT" />
+      		<property name="hibernate.connection.driver_class" value="oracle.jdbc.OracleDriver" />
+      		<property name="hibernate.default_schema" value="getcdr" /> 
+      		<property name="hibernate.transaction.flush_before_completion" value="true"/>  --> 
+      		 
+            <property name="hibernate.format_sql" value="false" />
+            <property name="hibernate.show_sql" value="false" />
+       		<property name="hibernate.jdbc.batch_size" value="500" />
+			<property name="hibernate.jdbc.batch_versioned_data" value="true" />
+			<property name="hibernate.use_sql_comments" value="true" />
+ 			<property name="hibernate.cache.use_second_level_cache" value="false" /> 
+ 			<property name="hibernate.cache.use_query_cache" value="false" />
+ 			
+			<!--  property name="hibernate.hbm2ddl.auto" value="create" / --> 
+			 
+         	<!-- Oracle   -->
+            <property name="hibernate.dialect"
+                    value="org.hibernate.dialect.Oracle10gDialect"/>      
+		</properties>
+		
+	</persistence-unit>
+</persistence>
