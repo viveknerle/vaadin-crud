@@ -42,7 +42,7 @@ public class BeanField extends AbstractPropertyField {
 //					} else {
 						String prop = DefaultFieldFactory.createCaptionByPropertyId(propertyData.getPropertyId());
 						child.setCaption(prop);
-						child.addComponent(new FormBean((BeanPropertyData)propertyData));
+						child.addComponent(new FormBean((BeanPropertyData) propertyData));
 //					}
 					
 					getApplication().getMainWindow().addWindow(child);
