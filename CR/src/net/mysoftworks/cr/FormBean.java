@@ -3,7 +3,6 @@ package net.mysoftworks.cr;
 import net.mysoftworks.cr.support.BeanPropertyData;
 import net.mysoftworks.cr.utils.EntityManagerUtils;
 
-import com.vaadin.data.Property;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -15,13 +14,14 @@ import com.vaadin.ui.Window;
 public class FormBean extends Form {
 
 //	private Object key;
-	private Object instance;
+//	private Object instance;
+	private BeanItem beanItem;
 	
-	private BeanPropertyData parentData;
+//	private BeanPropertyData parentData;
 
 	private void init(final Object instance,String title){
 		if (instance==null) throw new NullPointerException("Create a bean form with null instance");
-		this.instance = instance;
+		
 		if (title == null) {
 			title = instance.getClass().getSimpleName();
 		}
@@ -30,7 +30,8 @@ public class FormBean extends Form {
 //		final Form pForm = new Form();
 		setCaption(title);
 		setFormFieldFactory(new CustomFieldFactory());
-		setItemDataSource(new BeanItem(instance));
+		this.beanItem = new BeanItem(instance);
+		setItemDataSource(beanItem);
 		setImmediate(false);
 //		setLayout(new GridLayout(2, 8));
 				
@@ -44,10 +45,10 @@ public class FormBean extends Form {
 			
 			public void buttonClick(ClickEvent event) {
 				commit();
-				EntityManagerUtils.saveBean(instance);
-				if (parentData != null) {
-					parentData.setValue(instance);
-				}
+				EntityManagerUtils.saveBean(beanItem.getBean());
+//				if (parentData != null) {
+//					parentData.setValue(instance);
+//				}
 				((Window) getWindow().getParent()).removeWindow(getWindow());
 			}
 		});
@@ -64,7 +65,7 @@ public class FormBean extends Form {
 	}
 
 	public FormBean(BeanPropertyData parentData) throws Exception {
-		this.parentData = parentData;
+//		this.parentData = parentData;
 //		String title = DefaultFieldFactory.createCaptionByPropertyId(parentData.getPropertyId());
 		String title = parentData.getModelType().getSimpleName();
 		if (parentData.getValue()==null) {
@@ -76,8 +77,7 @@ public class FormBean extends Form {
 	
 	@Override
 	public String toString() {
-		return "FormBean [beanClass=" + instance.getClass() + ", instance=" + instance
-				+ ", parentData=" + parentData + "]";
+		return "FormBean [beanClass=" + beanItem.getClass() + "]";
 	}
 
 }
