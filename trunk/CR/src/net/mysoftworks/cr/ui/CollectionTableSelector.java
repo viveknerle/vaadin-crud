@@ -1,8 +1,10 @@
 package net.mysoftworks.cr.ui;
 
 import java.util.Collection;
+import java.util.List;
 
 import net.mysoftworks.cr.support.CollectionPropertyData;
+import net.mysoftworks.cr.utils.EntityManagerUtils;
 
 import com.vaadin.data.Container;
 import com.vaadin.data.util.BeanItemContainer;
@@ -22,24 +24,27 @@ public class CollectionTableSelector extends AbstractTableSelector implements Dr
 	@Override
 	protected void initLayout() {
 		Collection curr = currentValues();
+System.out.println("curr " + curr );		
 		Collection avail = availableValues(curr);
+System.out.println("avail " + avail );		
 		initSelectionTable(avail);
 		initCurrentItems(curr);
-		addComponent(getSelectionTable());
 		addComponent(getCurrentItems());
-		addSaveButton(getCurrentItems());
+		addComponent(getSelectionTable());
+		addSaveButton(getCurrentItems(),"Fatto");
 		
 	}
 
 	
 	private void initCurrentItems(Collection elements) {
 		this.currentItems = new Table();
-		BeanItemContainer cnt = new BeanItemContainer(propertyData.getType(),elements);
+		BeanItemContainer cnt = new BeanItemContainer(propertyData.getModelType(),elements);
 		this.currentItems.setContainerDataSource(cnt);
 		this.currentItems.setImmediate(false);
 		this.currentItems.setSelectable(true);
-		this.currentItems.setCaption("Second table");
+		this.currentItems.setCaption("Valori attuali");
 		
+		this.selectionTable.setCaption("Disponibili");
 		this.selectionTable.setDragMode(TableDragMode.ROW);
 		this.currentItems.setDragMode(TableDragMode.ROW);
 		this.selectionTable.setDropHandler(this);

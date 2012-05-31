@@ -25,7 +25,7 @@ public abstract class AbstractTableSelector extends HorizontalLayout {
 	
 	protected void initSelectionTable(Collection data) {
 		this.selectionTable = new Table();
-		BeanItemContainer cnt = new BeanItemContainer(propertyData.getType(),data);
+		BeanItemContainer cnt = new BeanItemContainer(propertyData.getModelType(),data);
 		this.selectionTable.setContainerDataSource(cnt);
 		this.selectionTable.setImmediate(false);
 		this.selectionTable.setSelectable(true);
@@ -33,10 +33,11 @@ public abstract class AbstractTableSelector extends HorizontalLayout {
 	}
 
 	protected <T> List<T> availableValues(Collection except) {
-		List<T> l = EntityManagerUtils.selectAll(propertyData.getType(),except);
+		List<T> l = EntityManagerUtils.selectAll(propertyData.getModelType(),except);
 		return l;
-//		return new BeanItemContainer(propertyData.getType(),l);
+		//	return new BeanItemContainer(propertyData.getType(),l);
 	}
+
 
 	protected abstract void initLayout();
 	
@@ -46,17 +47,17 @@ public abstract class AbstractTableSelector extends HorizontalLayout {
 	}
 
 
-	protected void addSaveButton(final Table current) {
+	protected void addSaveButton(final Table current,String caption) {
 		
-		Button saveButton = new Button("Salva");
+		Button saveButton = new Button(caption);
 		saveButton.addListener(new ClickListener() {
 			
 			public void buttonClick(ClickEvent event) {
 				try {
 					current.commit();
-System.out.println("on savettttttttt:" + current.getValue());					
-System.out.println("on save2:" + current.getContainerDataSource().getItemIds());
-System.out.println("on save3:" + propertyData.getValue());
+System.out.println("current.getValue():" + current.getValue());					
+System.out.println("current.getContainerDataSource().getItemIds():" + current.getContainerDataSource().getItemIds());
+System.out.println("propertyData.getValue():" + propertyData.getValue());
 					if (propertyData instanceof CollectionPropertyData) {
 						Collection<?> ids = current.getContainerDataSource().getItemIds();
 						((CollectionPropertyData) propertyData).clear();
@@ -65,7 +66,7 @@ System.out.println("on save3:" + propertyData.getValue());
 						}
 					} else {
 System.out.println("========propertyData:" + propertyData.getClass());						
-//						propertyData.addOrSetValue(current.getValue());
+						propertyData.addOrSetValue(current.getValue());
 					}
 					
 				} catch (Exception e) {

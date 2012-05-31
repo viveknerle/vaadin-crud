@@ -26,9 +26,7 @@ public abstract class AbstractPropertyField extends CustomField {
 System.out.println("===========Event property:" + event.getProperty());				
 System.out.println("===========Label getValue class:" + label.getValue().getClass());				
 System.out.println("===========Event getValue class:" + event.getProperty().getValue().getClass());				
-			if (!label.getValue().equals(event.getProperty().getValue())) {
-				setComponentError(new UserError("Modifiche non salvate"));
-			}
+			setComponentError(new UserError("Modifiche non salvate"));
 			label.setValue(event.getProperty().getValue());
 		}
 	};
@@ -52,7 +50,9 @@ System.out.println("addVChangeListener");
 					Window child = new Window(propertyData.getSimpleName());
 					child.setModal(true);
 					child.setWidth("80%");
-					child.addComponent(getEditor());
+					Component editor = getEditor();
+System.out.println("editor is " + editor);					
+					child.addComponent(editor);
 //					child.addComponent(new CollectionSelectionEditor(propertyData));
 					getApplication().getMainWindow().addWindow(child);
 				} catch (Exception e) {

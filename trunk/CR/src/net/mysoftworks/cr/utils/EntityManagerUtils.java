@@ -90,6 +90,7 @@ System.out.println("saveBean " + bean);
 			query.append(cl.getSimpleName());
 			query.append(" not in (:except)");
 		}
+System.out.println("Query " + query.toString());		
 		Query qr = em.createQuery(query.toString());
 		if (except!=null && !except.isEmpty()) {
 			qr.setParameter("except", except );

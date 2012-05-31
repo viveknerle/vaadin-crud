@@ -8,7 +8,7 @@ public class BeanTableSelector extends AbstractTableSelector {
 	protected void initLayout() {
 		initSelectionTable(availableValues(null));
 		addComponent(getSelectionTable());
-		addSaveButton(getSelectionTable());
+		addSaveButton(getSelectionTable(),"Conferma");
 	}
 	
 	public BeanTableSelector(BeanPropertyData propertyData ) {
