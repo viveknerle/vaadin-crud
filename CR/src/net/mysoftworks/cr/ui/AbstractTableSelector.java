@@ -58,9 +58,10 @@ public abstract class AbstractTableSelector extends HorizontalLayout {
 System.out.println("current.getValue():" + current.getValue());					
 System.out.println("current.getContainerDataSource().getItemIds():" + current.getContainerDataSource().getItemIds());
 System.out.println("propertyData.getValue():" + propertyData.getValue());
+System.out.println("propertyData:" + propertyData.getClass());
 					if (propertyData instanceof CollectionPropertyData) {
-						Collection<?> ids = current.getContainerDataSource().getItemIds();
 						((CollectionPropertyData) propertyData).clear();
+						Collection<?> ids = current.getContainerDataSource().getItemIds();
 						for (Object object : ids) {
 							propertyData.addOrSetValue(object);
 						}

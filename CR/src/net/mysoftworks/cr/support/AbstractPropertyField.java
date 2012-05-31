@@ -87,7 +87,7 @@ System.out.println("editor is " + editor);
 
 		GridLayout layout = new GridLayout(3,1);
 		layout.setMargin(false);
-		layout.setSpacing(true);		
+		layout.setSpacing(false);
 //System.out.println("getContent:" + ((VerticalLayout)p.getContent()).setMargin(false));
 //((VerticalLayout)p.getContent()).setSpacing(false);
 //((VerticalLayout)p.getContent()).setMargin(false);
