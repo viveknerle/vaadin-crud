@@ -7,9 +7,7 @@ import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.Component;
 
 public abstract class AbstractPropertyData implements Serializable {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	protected BeanItem beanItem;
 	protected Object propertyId;
