@@ -1,4 +1,4 @@
-package net.mysoftworks.cr.utils;
+package net.mysoftworks.crud.utils;
 
 import java.io.Serializable;
 import java.lang.reflect.Constructor;
@@ -23,9 +23,9 @@ public class EntityManagerUtils {
 	private static Logger log = LoggerFactory.getLogger(EntityManagerUtils.class); 
 	
 	
-	public static EntityManager getEntityManager() {
-		return getEm(false);
-	}
+//	public static EntityManager getEntityManager() {
+//		return getEm(false);
+//	}
 	
 	private static EntityManager getEm(boolean create) {
 		if (emf == null || create) {
@@ -59,15 +59,15 @@ public class EntityManagerUtils {
 		
 	}
 	
-	public static Object loadBean(Class beanClass,String key) {
-		EntityManager em = getEm(false);
+	public static Object loadBean(EntityManager em,Class beanClass,String key) {
+		if (em==null) em = getEm(false);
 		Serializable keyVal = generateKey(beanClass,key);
 		Object obj = em.find(beanClass, keyVal);
 		return obj;
 	}
 	
-	public static void saveBean(Object bean) {
-		EntityManager em = getEm(false);
+	public static void saveBean(EntityManager em,Object bean) {
+		if (em==null) em = getEm(false);
 System.out.println("saveBean " + bean);		
 		EntityTransaction tr = em.getTransaction();
 		tr.begin();
@@ -80,8 +80,8 @@ System.out.println("saveBean " + bean);
 		}
 	}	
 	
-	public static <T> List<T> selectAll(Class<T> cl,Collection except) {
-		EntityManager em = getEm(false);
+	public static <T> List<T> selectAll(EntityManager em,Class<T> cl,Collection except) {
+		if (em==null) em = getEm(false);
 		StringBuilder query = new StringBuilder("from ");
 		query.append(cl.getName());
 		if (except!=null && !except.isEmpty()) {

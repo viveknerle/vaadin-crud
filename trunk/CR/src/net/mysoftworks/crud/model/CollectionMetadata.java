@@ -1,4 +1,4 @@
-package net.mysoftworks.cr.model;
+package net.mysoftworks.crud.model;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
