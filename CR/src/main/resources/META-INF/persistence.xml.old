@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	#########################
+	PERSISTENCE UNIT FOR TEST
+	#########################
+ -->
+<persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+	<persistence-unit name="antonio" transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider> 
+		<properties>
+			<property name="hibernate.archive.autodetection" value="class"/>
+			
+			<!--
+		    <property name="hibernate.connection.password" value="" />
+        	<property name="hibernate.connection.username" value="root" />
+      		<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/antonio" />
+      		<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
+      		<property name="hibernate.default_schema" value="antonio" />
+
+       		<property name="hibernate.jdbc.batch_size" value="500" />
+			<property name="hibernate.jdbc.batch_versioned_data" value="true" />
+      		-->
+			<property name="hibernate.connection.datasource" value="java:comp/env/jdbc/crDataSource"/> 
+			 
+			 
+         	<!-- MYSQL   -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>      
+      		 
+            <property name="hibernate.format_sql" value="true" />
+            <property name="hibernate.show_sql" value="false" />
+			<property name="hibernate.use_sql_comments" value="true" />
+ 			<property name="hibernate.cache.use_second_level_cache" value="false" /> 
+ 			<property name="hibernate.cache.use_query_cache" value="false" />
+ 			
+			<!-- JTA -->
+			<!-- 
+ 			<property name="hibernate.transaction.manager_lookup_class" value="com.atomikos.icatch.jta.hibernate3.TransactionManagerLookup" />
+ 			<property name="com.atomikos.icatch.service" value="com.atomikos.icatch.standalone.UserTransactionServiceFactory"/>
+ 			-->
+ 			
+			<!-- 
+			<property name="hibernate.transaction.auto_close_session" value="true" />
+			<property name="hibernate.transaction.flush_before_completion" value="false" /> 		
+ 			<property name="hibernate.current_session_context_class" value="jta" />
+ 			-->
+ 			
+<!-- 		<property name="hibernate.current_session_context_class" value="managed"></property>
+ -->  
+		</properties>
+
+	</persistence-unit>
+	
+	
+</persistence>
