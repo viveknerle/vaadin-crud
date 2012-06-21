@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	#########################
+	PERSISTENCE UNITS
+	#########################
+ -->
+<persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+
+	<persistence-unit name="localJndiMysql" transaction-type="RESOURCE_LOCAL">
+		<description>Database MySQL sulla macchina fisica locale - Lookup JNDI del datasource</description>
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<properties>
+      		<!-- JNDI -->
+			<property name="hibernate.connection.datasource" value="java:comp/env/jdbc/crDataSource"/>			      
+			
+         	<!-- MYSQL   -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>      
+			
+			<property name="hibernate.hbm2ddl.auto" value="create"/>
+		</properties>
+	</persistence-unit>
+	
+	<persistence-unit name="remoteJdbcOracleVMXP" transaction-type="RESOURCE_LOCAL">
+		<description>Database Oracle sulla macchina virtuale vmWinXp - JDBC</description>
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<class>net.mysoftworks.crud.model.TaskToRoles</class>
+		<properties>
+      		<!-- JDBC -->
+			<property name="hibernate.connection.password" value="antonio" />
+			<property name="hibernate.connection.username" value="antonio" />
+      		<property name="hibernate.connection.url" value="jdbc:oracle:thin:@vmWinXp:1521:XE" />
+      		
+      		<!-- ORACLE -->
+      		<property name="hibernate.connection.driver_class" value="oracle.jdbc.OracleDriver" />
+			<property name="hibernate.dialect"  value="org.hibernate.dialect.Oracle10gDialect"/>      
+		
+			<property name="hibernate.hbm2ddl.auto" value="update"/>
+		</properties>
+	</persistence-unit>
+
+	<persistence-unit name="remoteJdbcOracleGet2" transaction-type="RESOURCE_LOCAL">
+		<description>Database Oracle sulla macchina virtuale get2.eng.it - JDBC</description>
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<class>net.mysoftworks.crud.model.TaskToRoles</class>
+		<properties>
+      		<!-- JDBC -->
+			<property name="hibernate.connection.password" value="getcdr" />
+			<property name="hibernate.connection.username" value="getcdr" />
+      		<property name="hibernate.connection.url" value="jdbc:oracle:thin:@get2.eng.it:1521:GETDBT" />
+
+      		<!-- ORACLE -->
+      		<property name="hibernate.connection.driver_class" value="oracle.jdbc.OracleDriver" />
+			<property name="hibernate.dialect"  value="org.hibernate.dialect.Oracle10gDialect"/>      
+		
+		</properties>
+	</persistence-unit>
+
+</persistence>

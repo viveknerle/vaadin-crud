@@ -6,7 +6,7 @@ import java.util.Collection;
 import com.vaadin.data.Container;
 import com.vaadin.data.Item;
 
-public interface ContainerProvider<ET> {
+public interface ContainerProvider<ET> extends Serializable {
 
 	public Container loadAll(Class<ET> clazz,Collection<ET> exclude);
 	public Item findByKey(Class<ET> clazz,Serializable pk);

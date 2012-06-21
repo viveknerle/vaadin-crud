@@ -29,7 +29,7 @@
 	<!-- PROPRIETA' DI BUILD -->
 	<!-- ======================== -->
 	<build>
-		<outputDirectory>target</outputDirectory>
+		<outputDirectory>target/classes</outputDirectory>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<plugins>
 			<plugin>
@@ -76,7 +76,7 @@
 				<version>${plugin.war.version}</version>
 				<configuration>
 					<webXml>src\main\webapp\WEB-INF\web.xml</webXml>
-					<warSourceDirectory>WebContent</warSourceDirectory>
+					<warSourceDirectory>src\main\webapp</warSourceDirectory>
 				</configuration>
 			</plugin>
 
@@ -204,7 +204,7 @@
 			<artifactId>client</artifactId>
 			<version>6.1</version>
 			<type>pom</type>
-			<scope>import</scope>
+			<scope>provided</scope>
 		</dependency>
             		
 <!--	Postgres JDBC driver 	
