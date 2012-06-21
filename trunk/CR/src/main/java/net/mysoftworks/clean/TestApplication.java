@@ -2,11 +2,7 @@ package net.mysoftworks.clean;
 
 import net.mysoftworks.crud.JPAMasterDetailEntityEditor;
 import net.mysoftworks.crud.JPAMasterDetailEntityEditor.MASTER_SELECT_TYPE;
-import net.mysoftworks.crud.model.Comune;
-import net.mysoftworks.crud.model.Indirizzo;
-import net.mysoftworks.crud.model.Regione;
-import net.mysoftworks.crud.model.Task;
-import net.mysoftworks.crud.model.Utente;
+import net.mysoftworks.crud.model.what.Event;
 
 import com.vaadin.Application;
 import com.vaadin.data.Property.ValueChangeEvent;
@@ -24,8 +20,7 @@ public class TestApplication extends Application {
 //		sel.addItem(Utente.class.getName());
 //		sel.addItem(Indirizzo.class.getName());
 //		sel.addItem(Comune.class.getName());
-//		sel.addItem(Regione.class.getName());
-		sel.addItem(Task.class.getName());
+		sel.addItem(Event.class.getName());
 		sel.setImmediate(true);
 		
 		sel.addListener(new ValueChangeListener() {

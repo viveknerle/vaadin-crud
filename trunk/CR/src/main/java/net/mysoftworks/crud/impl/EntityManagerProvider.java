@@ -9,14 +9,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.naming.Binding;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NameClassPair;
+import javax.naming.NamingEnumeration;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import javax.servlet.jsp.JspWriter;
 
 import net.mysoftworks.crud.interfaces.ContainerProvider;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,19 +31,31 @@ import com.vaadin.data.Container;
 import com.vaadin.data.Item;
 import com.vaadin.data.util.BeanContainer;
 import com.vaadin.data.util.BeanItem;
+import com.vaadin.data.util.BeanItemContainer;
 
 public class EntityManagerProvider<ET> implements ContainerProvider<ET> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static EntityManagerFactory emf;
 	private static Logger log = LoggerFactory.getLogger(EntityManagerProvider.class); 
 	
+
+	public static void main(String[] args) {
+		System.out.println(StringUtils.leftPad("", 20, "123"));
+	}
+	
 	private EntityManager getEm(boolean create) {
 		if (emf == null || create) {
-			Map map = new HashMap();
+			Map<String,String> map = new HashMap<String,String>();
 			if (create) {
 				map.put("hibernate.hbm2ddl.auto", "create");
 			}
-			emf = Persistence.createEntityManagerFactory("antonio",map);
+			
+			emf = Persistence.createEntityManagerFactory("localJndiMysql",map);
+//			emf = Persistence.createEntityManagerFactory("remoteJdbcOracleVMXP",map);
 		}
 		return emf.createEntityManager();
 	}	
@@ -47,10 +66,12 @@ public class EntityManagerProvider<ET> implements ContainerProvider<ET> {
 		}
 		Method m = null;
 		try {
+System.out.println("\n\nentity.getClass():" + entity.getClass().getName());			
 			m = entity.getClass().getMethod("getId", null);
-			return m.invoke(entity, null);
+System.out.println("\n\nmethod:" + m);			
+			return m.invoke(entity, (Object[])null);
 		} catch (NoSuchMethodException e) {
-			throw new IllegalArgumentException("Please provide <getId> method for retrieving primary key of class " + entity.getClass());
+			throw new IllegalArgumentException("Please provide <getId> method for retrieving primary key of " + entity.getClass());
 		} catch (IllegalArgumentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -64,19 +85,20 @@ public class EntityManagerProvider<ET> implements ContainerProvider<ET> {
 		return null;
 	}
 	
-	private static Serializable generateKey(Class clazz,String keyValue) {
+	private static <ET> Serializable generateKey(Class<ET> clazz,String keyValue) {
 		if (keyValue == null || "".equals(keyValue)) {
 			throw new IllegalArgumentException("Unable to generate primary key for class " + clazz + " using null value");
 		}
 		Method m = null;
 		try {
-			m = clazz.getMethod("getId", null);
+			m = clazz.getMethod("getId", (Class<?>)null);
 		} catch (NoSuchMethodException e) {
 			throw new IllegalArgumentException("Please provide <getId> method for retrieving primary key of class " + clazz);
 		}
 		try {
 System.out.println("\n\n============keyValue:" + keyValue);			
-			Constructor stringConstructor = m.getReturnType().getConstructor(String.class);
+			Class<ET> cl = (Class<ET>) m.getReturnType();
+			Constructor<ET> stringConstructor = (Constructor<ET>) cl.getConstructor(String.class);
 System.out.println("\n\n============stringConstructor:" + stringConstructor);			
 			return (Serializable) stringConstructor.newInstance(keyValue);
 		} catch (NoSuchMethodException e) {
@@ -109,7 +131,7 @@ System.out.println("saveBean " + bean);
 		}
 	}	
 	
-	public <T> List<T> selectAll(EntityManager em,Class<T> cl,Collection except) {
+	public <T> List<T> selectAll(EntityManager em,Class<T> cl,Collection<T> except) {
 		if (em==null) em = getEm(false);
 		StringBuilder query = new StringBuilder("from ");
 		char alias = cl.getSimpleName().charAt(0);
@@ -133,11 +155,13 @@ System.out.println("Query " + query.toString());
 	@Override
 	public Container loadAll(Class<ET> clazz, Collection<ET> exclude) {
 		List<ET> coll = selectAll(null, clazz, exclude);
-		BeanContainer result = new BeanContainer(clazz);
+		BeanItemContainer<ET> result = new BeanItemContainer<ET>(clazz);
+		result.addAll(coll);
 		for (ET et : coll) {
 			Object pk = getPrimaryKey(et);
-System.out.println("ET:" + et + " has pk:" + pk);			
-			result.addItem(pk, et);
+System.out.println("ET:" + et + " has pk:" + pk);
+//			result.addBean(result.addItem(pk));
+//			result.addItem(pk,et);
 		}
 		return result;
 	}

@@ -8,6 +8,7 @@ import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.data.util.BeanContainer;
 import com.vaadin.data.util.BeanItem;
+import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.ui.AbstractField;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Select;
@@ -26,8 +27,9 @@ public class JPAMasterDetailEntityEditor<ET> extends JPAEntityEditor<ET> {
 	
 	private AbstractField createSelect() {
 		Container cont = getContainerProvider().loadAll(cl, null);
-		if (cont instanceof BeanContainer) {
-			BeanContainer bic = (BeanContainer) cont;
+System.out.println("\n\nContainer:" + cont.getClass() );		
+		if (cont instanceof BeanItemContainer) {
+			BeanItemContainer bic = (BeanItemContainer) cont;
 			Collection ids = bic.getItemIds();
 			
 			for (Object id: ids) {
